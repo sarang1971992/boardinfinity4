@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stop Watch</title>
+    <link rel="stylesheet" href="style.css"> 
+    
+</head>
+<body>
+ 
+  <div id="container">
+    <div class="text">
+      <h1>Digital Clock</h1>
+   </div>
+        <div id="time">
+           <div class="date" id="date"></div>   
+        </div>
+        <div class="text" id="datee">
+            <h1 class="" id="newdate"></h1>
+        </div>
+
+        
+        <div id="btn-container">
+              <button class="btn" id="start" onclick="start()">Start</button>
+              <button class="btn" id="stop" onclick="stop()">Stop</button>
+               
+        </div>
+ </div>
+
+
+
+
+
+
+
+
+<script>
+                      var dateObj = new Date();
+                  var month = dateObj.getUTCMonth() + 1; 
+                  var day = dateObj.getUTCDate();
+                  var year = dateObj.getUTCFullYear();
+
+                  newdate = day + "/" + month + "/" + year;
+
+                  document.getElementById("newdate").innerHTML = newdate;   
+
+
+ var obj = setInterval("load()",500);
+ 
+ function start(){
+   obj = setInterval("load()",500);
+ }
+
+
+
+ function load(){
+   var time = new Date();
+   var hours = time.getHours();
+   var minutes = time.getMinutes();
+   var seconds = time.getSeconds();
+
+   if(hours > 12){
+     hours = hours - 12;
+   }
+
+   if(hours == 0){
+     hours = 12;
+   }
+   
+
+   document.getElementById("date").innerHTML =  hours + ' ' + minutes + ' ' + seconds ;
+
+ }
+
+
+ function stop(){
+   var oldTIme = document.getElementById("date").innerHTML;
+   document.getElementById("date").innerHTML = oldTIme;
+   clearInterval(obj);
+ }
+          
+
+
+ </script>
+</body>
+</html> 

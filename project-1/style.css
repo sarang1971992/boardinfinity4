@@ -1,0 +1,67 @@
+body{
+   background-color: black;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 100vh;
+} 
+
+.digit{
+   font-size: 100px;
+   font-weight: bold;
+}
+.text h1{
+   color: white;
+   text-align: center;
+   font-weight: 100;
+   letter-spacing: 0.3ch;
+   font-style: initial ;
+}
+.date{
+   margin-top: 20px;
+   color: white;
+   text-align: center;
+    
+   font-style: inherit;
+   font-weight: 100;
+   letter-spacing: 0.3ch;
+   font-size: 100px;
+   font-weight: bold; 
+}
+.txt{
+   font-size: 100px;
+    
+}
+
+
+#btn-container{
+   text-align: center;
+   margin-top: 40px;
+}
+.btn{
+   padding: 7px 25px;
+   font-size: 15px;
+   margin: 0px 10px;
+   color: black;
+   border: 0px;
+   cursor: pointer;
+   border-radius: 10%;
+}
+
+#start{
+  background-color: whitesmoke;
+}
+
+#stop{
+   background-color: whitesmoke;
+}
+
+/* #reset{
+   background-color: red;
+} */
+
+span{
+   color: white;
+}
+
+ 

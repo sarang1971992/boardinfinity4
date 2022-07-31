@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quote</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" />
+    
+</head>
+<body>
+  <header>Lets Start Our <span id="time"></span> with New Quote</header>
+   <div class="wrapper">
+      <div class="content">
+          <div class="quote-area">
+            <i id="left" class="fa-solid fa-quote-left"></i> <p class="quote" id="quote">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio, nihil voluptatem! Nemo rerum </p><i id="right" class="fa-solid fa-quote-right"></i> 
+            
+          </div>
+          <div class="author"><span>__</span>
+            <span class="name" id="name">Sarang Badgujar</span>
+            
+          </div>
+        </div>
+        <div class="buttons">
+              <button id="btn">New Quote</button>
+        </div>
+   </div>
+  
+    <script>
+
+          var today = new Date()
+          var curHr = today.getHours()
+          var time = null;
+
+          if (curHr < 12) {
+            var time = "Morning";
+          } else if (curHr < 18) {
+            var time = "Afternoon";
+          } else {
+            var time = "Evening";
+          }
+
+            
+
+      window.onload = function(e){ 
+        
+        document.getElementById("time").innerHTML = time;
+      
+      }
+
+
+      const quoteText = document.querySelector(".quote");
+ 
+      let quoteBtn = document.querySelector("button");
+      let author = document.querySelector(".author .name");
+
+
+
+      function randomQuote(){
+         quoteBtn.innerText = "Loading quote...."; 
+         fetch("https://api.quotable.io/random")
+         .then(res => res.json())
+         .then((result) => {
+              quoteText.innerText = result.content;
+              author.innerText = result.author;             
+         });
+
+         quoteBtn.innerText = "New Quote";
+          
+         var colorList = ["red", "green", "blue","orange","purple","green","yellow","Brown","pink"];
+         var color =   colorList[Math.floor(Math.random() * colorList.length)];
+         document.body.style.backgroundColor = color; 
+         document.getElementById("btn").style.background = color;
+         document.getElementById("name").style.color = color; 
+         document.getElementById("quote").style.color = color;  
+         document.getElementById("left").style.color = color;  
+         document.getElementById("right").style.color = color;         
+      }
+
+      quoteBtn.addEventListener('click',randomQuote);
+
+ 
+
+
+    </script>
+</body>
+</html> 
