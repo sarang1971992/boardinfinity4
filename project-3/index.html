@@ -7,82 +7,106 @@
     <title>Quote</title>
     <link rel="stylesheet" href="style.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" />
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"/>
 </head>
 <body>
-  <header>Lets Start Our <span id="time"></span> with New Quote</header>
-   <div class="wrapper">
-      <div class="content">
-          <div class="quote-area">
-            <i id="left" class="fa-solid fa-quote-left"></i> <p class="quote" id="quote">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio, nihil voluptatem! Nemo rerum </p><i id="right" class="fa-solid fa-quote-right"></i> 
-            
-          </div>
-          <div class="author"><span>__</span>
-            <span class="name" id="name">Sarang Badgujar</span>
-            
-          </div>
-        </div>
-        <div class="buttons">
-              <button id="btn">New Quote</button>
-        </div>
-   </div>
+      <div id="card-generator">
+            <header><h1>ID Card Generator</h1></header>
+            <div id="student">
+                  <div id="student-detail-enter" class="column">
+                         <h2>Enter Student Details</h2>
+                          <form id="form" action=""><br/>
+                               <div class="form-input">
+                                <label>Enter Name:</label><br/> 
+                                <span class="icon"><i class="fa-solid fa-address-card"></i></span><input type="text" id="name"  name=""><br/>
+                               </div>
+                               <div class="form-input">
+                                <label>Enter College Name:</label> <br/>
+                                <span class="icon"><i class="fa-solid fa-building-columns"></i></span><input type="text" id="colg-name" name=""> <br/>
+                               </div>
+                               <div class="form-input">
+                                <label>Enter Location:</label> <br/>
+                                <span class="icon"><i class="fa-solid fa-location-dot"></i></span><input type="text" id="location" name=""> <br/>
+                               </div>
+                               <div class="form-input">
+                                <label>Enter Student Picture:</label> <br/>
+                                <input type="file" id="student-img" name="" onchange="onFileSelected(event)"> <br/> 
+                               </div>
+                               <div class="img" id="img">
+                                 <img    id="myimage" width="100%" height="100%">
+                               </div>
+
+                               <button type="button" id="btn" class="btn" onclick="submitData()">Generate Card</button>    
+                          </form>
+                          
+                  </div>
+                  <div id="student-generated-id" class="column">
+                        <h2>Generated ID Card</h2>
+                       <div class="card">
+                            <div class="id-image column">
+                                     <img   id="display-image" height="50%" width="50%">
+                            </div>
+                            <div class="id-description column">
+                              <div class="span">
+                                <div class="">
+                                  <span class="span1">Name:</span><span class="span2" id="display-name"> </span>
+                                </div>
+                                <div>
+                                  <span class="span1">College Name:</span><span class="span2" id="display-clg"> </span>
+                                </div>
+                                <div>
+                                  <span class="span1">Location:</span><span class="span2" id="display-location"></span>
+                                </div>
+                              
+                              </div>
+ 
+                            </div>
+                       </div>
+                  </div>
+            </div>
+      </div>
   
+
     <script>
 
-          var today = new Date()
-          var curHr = today.getHours()
-          var time = null;
+        function onFileSelected(event) {
+          var selectedFile = event.target.files[0];
+          var reader = new FileReader();
 
-          if (curHr < 12) {
-            var time = "Morning";
-          } else if (curHr < 18) {
-            var time = "Afternoon";
-          } else {
-            var time = "Evening";
-          }
+          var imgtag = document.getElementById("myimage");
+          imgtag.title = selectedFile.name;
 
+          reader.onload = function(event) {
+            imgtag.src = event.target.result;
+          };
+
+          reader.readAsDataURL(selectedFile);
+
+          document.getElementById('img').style.display = "block"; 
+        }
+
+        function submitData(){
+            var name = document.getElementById("name").value;
+            var colgname = document.getElementById("colg-name").value;
+            var location = document.getElementById("location").value;
             
 
-      window.onload = function(e){ 
-        
-        document.getElementById("time").innerHTML = time;
-      
-      }
+            document.getElementById("display-clg").innerHTML = colgname;
+            document.getElementById("display-name").innerHTML = name;
+            document.getElementById("display-location").innerHTML = location;
+            
+            //image-code
+            const imagesrc = document.getElementById("myimage").src;
+            
+            document.getElementById("display-image").src = imagesrc; 
 
-
-      const quoteText = document.querySelector(".quote");
- 
-      let quoteBtn = document.querySelector("button");
-      let author = document.querySelector(".author .name");
-
-
-
-      function randomQuote(){
-         quoteBtn.innerText = "Loading quote...."; 
-         fetch("https://api.quotable.io/random")
-         .then(res => res.json())
-         .then((result) => {
-              quoteText.innerText = result.content;
-              author.innerText = result.author;             
-         });
-
-         quoteBtn.innerText = "New Quote";
-          
-         var colorList = ["red", "green", "blue","orange","purple","green","yellow","Brown","pink"];
-         var color =   colorList[Math.floor(Math.random() * colorList.length)];
-         document.body.style.backgroundColor = color; 
-         document.getElementById("btn").style.background = color;
-         document.getElementById("name").style.color = color; 
-         document.getElementById("quote").style.color = color;  
-         document.getElementById("left").style.color = color;  
-         document.getElementById("right").style.color = color;         
-      }
-
-      quoteBtn.addEventListener('click',randomQuote);
-
- 
+            document.getElementById('img').style.display = "none"; 
+            document.getElementById("form").reset();
+            
+        }
 
 
     </script>
+     
 </body>
 </html> 
